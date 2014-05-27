@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<!--Con esto hacemos que exista-->
+		<record id="action_modulo_form" model="ir.actions.act_window">
+			<field name="name">Modulo</field>
+			<field name="res_model">modulo</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	
+		
+		<!--Con esto hacemos la vsita tree-->
+		<record id="view_modulo_tree" model="ir.ui.view">
+			<field name="name">modulo.form</field>
+			<field name="model">modulo</field>
+			<field name="arch" type="xml">
+				<tree string="Modulo">		
+					<field name="name"/>
+					<field name="aadfixed_place_of_payment"/>
+					<field name="name_id"/>
+					<field name="res_company"/>
+					<field name= "duration"/>
+					<field name="option_id"/>
+				</tree>
+			</field>	
+		</record>
+	
+		<!--Con esto hacemos la vista form-->
+		<record id="view_modulo_form" model="ir.ui.view">
+			<field name="name">modulo.form</field>
+			<field name="model">modulo</field>
+			<field name="arch" type="xml">
+				<form string="Modulo" version="7.0">
+					<sheet>
+						<group colspan="2">		
+							<field name="name"/>
+				       		<field name="aadfixed_place_of_payment"/>
+				        	<field name="aadfixed_unit"/>
+							<field name="aadfixed_datetime"/>
+				        	<field name="aadfixed_unit_amount"/>
+				        	<field name="aadfixed_total_amount"/>
+							<field name="name_id"/>
+					        <field name="res_company"/>
+							<field name="res_currency"/> 
+							<field name="res_partner"/>
+							<field name="account"/>
+							<field name="account_temp"/>
+							<field name="mail"/>
+							<field name="pricelist"/>
+							<field name="ate"/>
+							<field name="campo_id"/>
+							<field name="producto_ids"/>
+							<field name="umo_id"/>
+							<field name= "duration"/>
+							<field name="option_id"/>
+						</group>    
+					</sheet>
+				</form>
+			</field>	
+		</record>
+	
+	
+		<!--record id="view_modulo_form" model="ir.ui.view">
+			<field name="name">modulo.form</field>
+			<field name="model">modulo</field>
+			<field name="arch" type="xml">
+				<form string="Modulo" version="7.0">
+					<sheet>
+						<notebook>
+							<page string="Modulo">
+								<group colspan="2">
+									<field name="name"/>
+									<field name="name_id"/>
+									<field name="option_id"/>
+								</group>
+							</page>
+							<page string="mas cosas">
+								<group>
+									<field name="aadfixed_place_of_payment"/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>	
+		</record-->
+
+         
+	    <!--menus-->      
+		<menuitem name="Modulo" id="menu_mo_root" sequence="90"/>
+		<menuitem id="menu_lmo_fixed_assets_main" parent="menu_mo_root" name="Liquidations" sequence="0"/>
+		<menuitem action="action_modulo_form" id="assets_and_deductions_fixed_menuitem" parent="menu_lmo_fixed_assets_main" sequence="1"/>
+                 
+    </data>
+</openerp>
