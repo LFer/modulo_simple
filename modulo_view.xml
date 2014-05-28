@@ -6,7 +6,7 @@
 			<field name="name">Modulo</field>
 			<field name="res_model">modulo</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,kanban</field>
 		</record>
 	
 		
@@ -35,6 +35,9 @@
 					<sheet>
 						<group colspan="2">		
 							<field name="name"/>
+							<field name="list_price"/>
+							<field name="color"/>	
+							<field name="type"/>	
 				       		<field name="aadfixed_place_of_payment"/>
 				        	<field name="aadfixed_unit"/>
 							<field name="aadfixed_datetime"/>
@@ -60,32 +63,95 @@
 			</field>	
 		</record>
 	
-	
-		<!--record id="view_modulo_form" model="ir.ui.view">
-			<field name="name">modulo.form</field>
+	<record model="ir.ui.view" id="modulo_kanban_view">
+			<field name="name">modulo Kanban</field>
 			<field name="model">modulo</field>
 			<field name="arch" type="xml">
-				<form string="Modulo" version="7.0">
-					<sheet>
-						<notebook>
-							<page string="Modulo">
-								<group colspan="2">
-									<field name="name"/>
-									<field name="name_id"/>
-									<field name="option_id"/>
-								</group>
-							</page>
-							<page string="mas cosas">
-								<group>
-									<field name="aadfixed_place_of_payment"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
-			</field>	
-		</record-->
-
+				<kanban>
+					<templates>
+						<field name="name" />
+						<t t-name="kanban-box">
+							<div
+								t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+								<div class="oe_dropdown_toggle oe_dropdown_kanban">
+									<span class="oe_e">í</span>
+									<ul class="oe_dropdown_menu">
+										<t t-if="widget.view.is_action_enabled('edit')">
+											<li>
+												<a type="edit">Edit...</a>
+											</li>
+										</t>
+										<t t-if="widget.view.is_action_enabled('delete')">
+											<li>
+												<a type="delete">Delete</a>
+											</li>
+										</t>
+										<li>
+											<ul class="oe_kanban_colorpicker" data-field="color" />
+										</li>
+									</ul>
+								</div>
+								<div class="oe_kanban_content">
+									<div>
+										<b>
+											<field name="name" />
+											<field name="color"/>
+											<field name="type"/>
+										</b>
+										<t t-if="record.name.raw_value">
+											-
+											<b>
+												<t t-esc="record.name.value" />
+												<field name="name" />
+											</b>
+										</t>
+									</div>
+									<div>
+										<field name="name" />
+									</div>
+									<div class="oe_clear"></div>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+		
+		
+		
+		
+		
+		
+		<!--record model="ir.ui.view" id="modulo_kanban_view">
+            <field name="name">Modulo Kanban</field>
+            <field name="model">modulo</field>
+            <field name="arch" type="xml">
+                <kanban>		
+					<field name="name" />
+					<field name="color"/>
+					<field name="type"/>
+						<templates>
+							<t t-name="kanban-box">
+								<div class="oe_kanban_vignette oe_semantic_html_override">
+									<a type="open"><img t-att-src="kanban_image('modulo', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+									<div class="oe_kanban_details">
+										<h4>
+											<a type="open">
+												<t t-if="record.code.raw_value">[<field name="code"/>]</t> <field name="name"/>
+											</a>
+										</h4>
+										<div name="tags"/>
+										<ul>
+											<li>Type: <field name="type"></field></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record-->
          
 	    <!--menus-->      
 		<menuitem name="Modulo" id="menu_mo_root" sequence="90"/>
